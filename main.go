@@ -1,7 +1,7 @@
 package main
 
 import (
-  "zero-book-demo/db"
+  "post-api/db"
 )
 
 func main() {
