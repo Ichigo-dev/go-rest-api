@@ -3,17 +3,16 @@ package posts
 import (
   "fmt"
   "net/http"
-  "gorm.io/gorm"
-  _"github.com/julienschmidt/httprouter"
+  "github.com/julienschmidt/httprouter"
 
   "post-api/db"
 )
 
-func Index(w http.ResponseWriter, r *http.Request, Db *gorm.DB) {
+func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
   fmt.Fprintf(w, "hello")
 }
 
-func Create(w http.ResponseWriter, r *http.Request, Db *gorm.DB) {
-    post := db.Post{Content: "Hello World"}
-    Db.Create(&post)
+func Create(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+  post := db.Post{Content: "Hello World"}
+  db.Db.Create(&post)
 }
