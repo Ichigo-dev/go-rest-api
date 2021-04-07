@@ -11,5 +11,6 @@ func Db() (Db *gorm.DB, err error){
   if err != nil {
     panic(err)
   }
+  Db.AutoMigrate(Post{})
   return
 }
