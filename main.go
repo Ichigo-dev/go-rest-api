@@ -5,6 +5,7 @@ import (
   "post-api/app/handlers/posts"
 
   "net/http"
+  _"fmt"
 )
 
 func main() {
@@ -15,7 +16,14 @@ func main() {
     Addr: "127.0.0.1:8080",
   }
 
-  http.HandleFunc("/posts", posts.Index)
+  http.HandleFunc("/posts", func(w http.ResponseWriter, h *http.Request) {
+    posts.Create(w, h, Db)
+  })
+
+  //http.HandleFunc("/posts", func(w http.ResponseWriter, h *http.Request) {
+  //  posts.Create(w, h, Db)
+  //})
+
 
   server.ListenAndServe()
 }
