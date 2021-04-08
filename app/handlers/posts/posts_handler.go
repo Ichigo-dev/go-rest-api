@@ -1,8 +1,9 @@
 package posts
 
 import (
-  "fmt"
+  _"fmt"
   "net/http"
+  "encoding/json"
   "github.com/julienschmidt/httprouter"
   "github.com/antonholmquist/jason"
 
@@ -10,7 +11,9 @@ import (
 )
 
 func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-  fmt.Fprintf(w, "hello")
+  var posts []db.Post
+  db.Db.Find(&posts)
+  json.NewEncoder(w).Encode(posts)
 }
 
 func Create(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
@@ -19,4 +22,5 @@ func Create(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
   post := db.Post{Content: content}
   db.Db.Create(&post)
+  json.NewEncoder(w).Encode(&post)
 }
