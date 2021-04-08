@@ -24,3 +24,9 @@ func Create(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
   db.Db.Create(&post)
   json.NewEncoder(w).Encode(&post)
 }
+
+func Show(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+  var post db.Post
+  db.Db.Where("id = ?", ps.ByName("id")).First(&post)
+  json.NewEncoder(w).Encode(post)
+}

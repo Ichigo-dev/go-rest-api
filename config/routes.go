@@ -13,4 +13,5 @@ func init() {
   Route = httprouter.New()
   Route.GET("/posts", posts.Index)
   Route.POST("/posts", posts.Create)
+  Route.GET("/posts/:id", posts.Show)
 }
