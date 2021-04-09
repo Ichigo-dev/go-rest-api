@@ -30,3 +30,12 @@ func Show(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
   db.Db.Where("id = ?", ps.ByName("id")).First(&post)
   json.NewEncoder(w).Encode(post)
 }
+
+func Update(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+  v, _ := jason.NewObjectFromReader(r.Body)
+  content, _ := v.GetString("content")
+
+  var post db.Post
+  db.Db.Model(&post).Where("id = ?", ps.ByName("id")).Update("content", content)
+  json.NewEncoder(w).Encode(post)
+}

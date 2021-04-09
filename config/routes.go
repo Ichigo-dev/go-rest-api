@@ -14,4 +14,5 @@ func init() {
   Route.GET("/posts", posts.Index)
   Route.POST("/posts", posts.Create)
   Route.GET("/posts/:id", posts.Show)
+  Route.PATCH("/posts/:id", posts.Update)
 }
