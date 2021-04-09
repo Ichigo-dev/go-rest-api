@@ -39,3 +39,7 @@ func Update(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
   db.Db.Model(&post).Where("id = ?", ps.ByName("id")).Update("content", content)
   json.NewEncoder(w).Encode(post)
 }
+
+func Delete(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+  db.Db.Delete(&db.Post{}, ps.ByName("id"))
+}
